@@ -1,5 +1,7 @@
 package com.example.notesapp.Classes;
 
+import android.util.Log;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -12,7 +14,7 @@ public class NoteFetcher {
 
     public NoteFetcher() {
         client = new OkHttpClient();
-        baseUrl = "https://[PROJECT-ID].firebaseio.com/notes.json";  // Înlocuiește [PROJECT-ID] cu ID-ul tău real de proiect Firebase.
+        baseUrl = "https://notesapp-a23a3-default-rtdb.firebaseio.com/Notes.json";
     }
 
     public void fetchAllNotes(FirebaseCallback callback) {
@@ -34,6 +36,7 @@ public class NoteFetcher {
                 } else {
                     // Returnează datele printr-un callback
                     String responseData = response.body().string();
+                    Log.d("NoteFetcher", "Data received: " + responseData); // Log pentru debugging
                     callback.onCallback(responseData);
                 }
             }

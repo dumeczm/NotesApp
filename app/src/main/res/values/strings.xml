@@ -10,4 +10,11 @@
     <string name="fullName">Full Name:</string>
     <string name="register_button">Register</string>
     <string name="already_registered">Already registered? Sign in!</string>
+    <string-array name="categories_array">
+        <item>Selecteaza o categorie</item>
+        <item>Personal</item>
+        <item>Munca</item>
+        <item>Studiu</item>
+        <item>Altele</item>
+    </string-array>
 </resources>
