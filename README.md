@@ -144,7 +144,7 @@ A doua imagine afișează un meniu popup care apare când un utilizator apasă l
 
 6. Link-uri  
 
-	A. Github:
+	A. Github: https://github.com/dumeczm/NotesApp.git
 
 	B. Youtube: https://www.youtube.com/watch?v=S0YjIvp11Y0
   
