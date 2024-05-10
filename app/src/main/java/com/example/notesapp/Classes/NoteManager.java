@@ -1,4 +1,8 @@
 package com.example.notesapp.Classes;
+import android.util.Log;
+
+import java.io.IOException;
+
 import okhttp3.*;
 
 public class NoteManager {
@@ -7,12 +11,24 @@ public class NoteManager {
 
     public void createNote(String noteId, String category, String content, Callback callback) {
         String jsonData = String.format("{\"category\": \"%s\", \"content\": \"%s\"}", category, content);
-        RequestBody body = RequestBody.create(jsonData, MediaType.get("application/json; charset=utf-8"));
+        RequestBody body = RequestBody.create(jsonData, MediaType.parse("application/json; charset=utf-8"));
         Request request = new Request.Builder()
                 .url(baseUrl + noteId + ".json")
                 .put(body)
                 .build();
-        client.newCall(request).enqueue(callback);
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("NoteManager", "Failed to create note: " + e.getMessage());
+                callback.onFailure(call, e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.i("NoteManager", "Response for creating note: " + response.body().string());
+                callback.onResponse(call, response);
+            }
+        });
     }
 
     public void readNote(String noteId, Callback callback) {
