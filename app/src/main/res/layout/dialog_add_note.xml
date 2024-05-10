@@ -5,11 +5,20 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/editTextCategory"
+    <Spinner
+        android:id="@+id/categorySpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Introduceți categoria"/>
+        android:layout_margin="5dp"
+        android:background="#95FFFFFF"
+        android:popupBackground="#FFFFFF" />
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Introduceți titlul"/>
 
     <EditText
         android:id="@+id/editTextContent"

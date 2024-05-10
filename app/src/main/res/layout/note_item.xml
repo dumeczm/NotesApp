@@ -12,12 +12,12 @@
 
     <!-- TextView pentru categoria notiței -->
     <TextView
-        android:id="@+id/tvCategory"
+        android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:text="Categorie" />
+        tools:text="Titlu" />
 
     <!-- TextView pentru conținutul notiței -->
     <TextView
