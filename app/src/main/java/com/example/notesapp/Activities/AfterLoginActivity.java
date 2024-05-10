@@ -81,6 +81,7 @@ public class AfterLoginActivity extends AppCompatActivity implements NoteInterac
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(userInteracted){
+
                     category = parent.getItemAtPosition(position).toString();
                     filterNotesByCategory(category);
                     noteManager.readAllNotes(new FirebaseCallback() {
