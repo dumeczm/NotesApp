@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -234,7 +235,7 @@ public class AfterLoginActivity extends AppCompatActivity implements NoteInterac
         }
         dialog.show();
     }
-    private void showUpdateNoteDialog(Note note) {
+    private void showUpdateNoteDialog(@NonNull Note note) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_add_note, null);
@@ -283,7 +284,7 @@ public class AfterLoginActivity extends AppCompatActivity implements NoteInterac
         dialog.show();
     }
     @Override
-    public void onDeleteNote(Note note) {
+    public void onDeleteNote(@NonNull Note note) {
         noteManager.deleteNote(note.getNoteId(), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
