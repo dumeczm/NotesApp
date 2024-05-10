@@ -62,7 +62,6 @@ public class AfterLoginActivity extends AppCompatActivity implements NoteInterac
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
-
         noteManager.readAllNotes(new FirebaseCallback() {
             @Override
             public void onCallback(String data) {
@@ -283,10 +282,34 @@ public class AfterLoginActivity extends AppCompatActivity implements NoteInterac
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
     @Override
     public void onDeleteNote(Note note) {
-
+        noteManager.deleteNote(note.getNoteId(), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Failed to delete note: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(getApplicationContext(), "Note deleted successfully", Toast.LENGTH_SHORT).show();
+                        noteManager.readAllNotes(new FirebaseCallback() {
+                            @Override
+                            public void onCallback(String data) {
+                                runOnUiThread(() -> updateNotesListCategory(data, category));
+                            }
+                            @Override
+                            public void onError(Exception e) {
+                                runOnUiThread(() -> Toast.makeText(AfterLoginActivity.this, "Error loading notes: " + e.getMessage(), Toast.LENGTH_LONG).show());
+                            }
+                        });
+                    });
+                } else {
+                    runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Failed to delete note", Toast.LENGTH_SHORT).show());
+                }
+            }
+        });
     }
     @Override
     public void onUpdateNote(Note note) {
